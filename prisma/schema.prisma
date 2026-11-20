@@ -1,0 +1,118 @@
+// Slotwise data model. Times are stored in UTC (timestamptz); each business has its own IANA time zone.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  business     Business?
+}
+
+model Business {
+  id          String   @id @default(cuid())
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId     String   @unique
+  name        String
+  /// Public booking URL: /book/<slug>
+  slug        String   @unique
+  description String   @default("")
+  phone       String   @default("")
+  address     String   @default("")
+  timezone    String   @default("Asia/Kolkata")
+  /// Minutes between bookable start times.
+  slotStepMin Int      @default(15)
+  /// Minimum notice before a booking, in minutes.
+  minNoticeMin Int     @default(60)
+  /// How many days ahead customers can book.
+  maxDaysAhead Int     @default(30)
+  createdAt   DateTime @default(now())
+
+  services     Service[]
+  staff        Staff[]
+  workingHours WorkingHours[]
+  bookings     Booking[]
+}
+
+model Service {
+  id          String    @id @default(cuid())
+  business    Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  businessId  String
+  name        String
+  description String    @default("")
+  durationMin Int
+  /// Price in rupees.
+  price       Int
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  bookings    Booking[]
+
+  @@index([businessId])
+}
+
+model Staff {
+  id         String    @id @default(cuid())
+  business   Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  businessId String
+  name       String
+  active     Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  bookings   Booking[]
+
+  @@index([businessId])
+}
+
+/// Opening hours for one weekday (0 = Sunday ... 6 = Saturday), in minutes after local midnight.
+/// A weekday with no row is closed.
+model WorkingHours {
+  id         String   @id @default(cuid())
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  businessId String
+  weekday    Int
+  openMin    Int
+  closeMin   Int
+
+  @@unique([businessId, weekday])
+}
+
+enum BookingStatus {
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  /// Short human-friendly reference shown to the customer, e.g. "K7Q2MX".
+  code          String        @unique
+  /// Secret used in the customer's self-service cancel link.
+  cancelToken   String
+  business      Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  businessId    String
+  service       Service       @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  serviceId     String
+  staff         Staff         @relation(fields: [staffId], references: [id], onDelete: Restrict)
+  staffId       String
+  startAt       DateTime      @db.Timestamptz(3)
+  endAt         DateTime      @db.Timestamptz(3)
+  customerName  String
+  customerPhone String
+  customerEmail String        @default("")
+  notes         String        @default("")
+  status        BookingStatus @default(CONFIRMED)
+  createdAt     DateTime      @default(now())
+
+  // Double-booking protection is enforced by a Postgres exclusion constraint added in the
+  // initial migration (one staff member can't have two overlapping active bookings).
+  @@index([businessId, startAt])
+  @@index([staffId, startAt])
+}
