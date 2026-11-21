@@ -14,7 +14,7 @@ RUN npm ci
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npm run build
+RUN npm run build && npm run build:seed
 
 # 3. Migration tooling only: the Prisma CLI in an isolated folder
 FROM base AS migrate
@@ -32,6 +32,7 @@ RUN addgroup -S app && adduser -S app -G app
 COPY --from=build /app/.next/standalone ./
 COPY --from=build /app/.next/static ./.next/static
 COPY --from=build /app/public ./public
+COPY --from=build /app/dist/seed.mjs ./seed.mjs
 COPY --from=migrate /migrate ./migrate
 COPY --chmod=755 docker-entrypoint.sh ./
 USER app

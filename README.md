@@ -5,9 +5,9 @@ Every business gets its own booking page. Customers pick a service, a team membe
 
 [![CI/CD](https://github.com/Raj02Priyesh/slotwise/actions/workflows/ci.yml/badge.svg)](https://github.com/Raj02Priyesh/slotwise/actions/workflows/ci.yml)
 
-**Live demo:** _link added after deployment_
-- Public booking page: `/book/velvet-vine`
-- Owner dashboard: log in with `demo@slotwise.app` / `demo1234` (demo data is reset regularly)
+**Live demo:** https://slotwise-6hrk.onrender.com (free hosting: the first visit after a quiet spell can take about a minute to wake up)
+- Public booking page: [/book/velvet-vine](https://slotwise-6hrk.onrender.com/book/velvet-vine)
+- Owner dashboard: [log in](https://slotwise-6hrk.onrender.com/login) with `demo@slotwise.app` / `demo1234` (the demo resets whenever the server restarts)
 
 ## Features
 
@@ -58,7 +58,7 @@ Every push and pull request runs [`.github/workflows/ci.yml`](.github/workflows/
 4. Production build, demo seed, then Playwright end-to-end tests (report uploaded on failure)
 5. Docker image build; on `main` the image is published to `ghcr.io/raj02priyesh/slotwise`
 
-Render deploys `main` from the Dockerfile once the checks pass. The container runs `prisma migrate deploy` before starting, and `/api/health` checks the database connection.
+Render deploys `main` from the Dockerfile once the checks pass, using a Neon serverless Postgres database. The container runs `prisma migrate deploy` before starting (and, with `SEED_DEMO=true`, reloads the demo business), and `/api/health` checks the database connection.
 
 ## Run it locally
 

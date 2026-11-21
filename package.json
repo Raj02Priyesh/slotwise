@@ -13,6 +13,7 @@
     "db:generate": "prisma generate --config prisma7.config.ts",
     "db:migrate": "prisma migrate deploy --config prisma7.config.ts",
     "db:seed": "tsx prisma/seed.ts",
+    "build:seed": "esbuild prisma/seed.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/seed.mjs \"--banner:js=import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\"",
     "postinstall": "prisma generate --config prisma7.config.ts"
   },
   "dependencies": {
@@ -37,6 +38,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dotenv": "^18.0.10",
+    "esbuild": "0.28.2",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "prisma": "^7.10.1",
