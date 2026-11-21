@@ -122,7 +122,7 @@ export async function createBooking(slug: string, input: z.input<typeof bookingR
       throw error
     }
   }
-  return { ok: false, status: 409, error: 'Sorry — someone just booked that time. Please pick another slot.' }
+  return { ok: false, status: 409, error: 'Sorry - someone just booked that time. Please pick another slot.' }
 }
 
 async function uniqueCode(): Promise<string> {

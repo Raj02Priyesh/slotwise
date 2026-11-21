@@ -11,7 +11,7 @@ type Staff = { id: string; name: string }
 type Slot = { start: string; end: string }
 
 const REASONS: Record<string, string> = {
-  closed: 'Closed on this day — please pick another date.',
+  closed: 'Closed on this day - please pick another date.',
   past: 'This date has passed.',
   'too-far': 'This date is too far ahead.',
 }
@@ -204,7 +204,7 @@ export function BookingWidget(props: {
               </div>
             ) : (
               <p className="rounded-lg bg-slate-50 p-4 text-sm text-slate-600">
-                {reason === 'network' ? 'Couldn’t load times. Please try again.' : (reason && REASONS[reason]) ?? 'No free times left on this day — try another date.'}
+                {reason === 'network' ? 'Couldn’t load times. Please try again.' : (reason && REASONS[reason]) ?? 'No free times left on this day - try another date.'}
               </p>
             )}
           </section>
@@ -251,7 +251,7 @@ export function BookingWidget(props: {
                   <button type="submit" disabled={submitting} className="btn-primary w-full py-3 text-base">
                     {submitting && <Spinner />} {submitting ? 'Booking…' : 'Confirm booking'}
                   </button>
-                  <p className="mt-2 text-center text-xs text-slate-500">No payment needed now — pay at your appointment.</p>
+                  <p className="mt-2 text-center text-xs text-slate-500">No payment needed now - pay at your appointment.</p>
                 </div>
               </form>
             </section>

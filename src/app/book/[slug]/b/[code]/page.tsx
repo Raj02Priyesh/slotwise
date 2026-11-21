@@ -56,7 +56,7 @@ export default async function BookingConfirmationPage({ params, searchParams }: 
 
         {!cancelled && (
           <p className="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
-            Bookmark this page — it’s your private link to view or cancel this booking.
+            Bookmark this page - it’s your private link to view or cancel this booking.
           </p>
         )}
 

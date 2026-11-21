@@ -2,12 +2,12 @@ import Link from 'next/link'
 import { Logo } from '@/components/ui'
 
 const FEATURES = [
-  { icon: '🔗', title: 'Your own booking page', text: 'Share one link on Instagram, WhatsApp or Google. Customers book in under a minute — no app, no account.' },
+  { icon: '🔗', title: 'Your own booking page', text: 'Share one link on Instagram, WhatsApp or Google. Customers book in under a minute - no app, no account.' },
   { icon: '⏱️', title: 'Real-time availability', text: 'Only genuinely free times are shown, based on your hours, each service’s length and every team member’s calendar.' },
-  { icon: '🛡️', title: 'No double bookings', text: 'Enforced by the database itself — even if two people tap the same slot at the same second, only one gets it.' },
+  { icon: '🛡️', title: 'No double bookings', text: 'Enforced by the database itself - even if two people tap the same slot at the same second, only one gets it.' },
   { icon: '👥', title: 'Built for teams', text: 'Each person has their own calendar. Customers pick someone or “anyone available”, and the next free person is assigned.' },
   { icon: '📅', title: 'Simple dashboard', text: 'See today and the week ahead, mark appointments done, cancel, and manage services, team and opening hours.' },
-  { icon: '🌍', title: 'Time-zone aware', text: 'Every business runs in its own time zone, so slots are always right — wherever your customers are.' },
+  { icon: '🌍', title: 'Time-zone aware', text: 'Every business runs in its own time zone, so slots are always right - wherever your customers are.' },
 ]
 
 export default function Home() {
@@ -25,14 +25,14 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-4 pt-12 pb-20 text-center sm:pt-20">
           <p className="mx-auto mb-5 inline-block rounded-full bg-brand-50 px-3 py-1 text-sm font-medium text-brand-700">Online booking for salons, clinics, tutors & studios</p>
           <h1 className="mx-auto max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">
-            Let customers book you <span className="text-brand-600">24/7</span> — without the back-and-forth.
+            Let customers book you <span className="text-brand-600">24/7</span> - without the back-and-forth.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600">
             Slotwise gives your business a beautiful booking page with live availability, and a dashboard to manage every appointment.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/book/velvet-vine" className="btn-primary px-6 py-3 text-base">Try a live booking page</Link>
-            <Link href="/signup" className="btn-secondary px-6 py-3 text-base">Create your own — free</Link>
+            <Link href="/signup" className="btn-secondary px-6 py-3 text-base">Create your own - free</Link>
           </div>
           <p className="mt-4 text-sm text-slate-500">
             Peek at the owner dashboard: log in with <span className="font-medium text-slate-700">demo@slotwise.app</span> / <span className="font-medium text-slate-700">demo1234</span>

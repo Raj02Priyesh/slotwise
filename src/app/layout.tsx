@@ -5,7 +5,7 @@ import './globals.css'
 const inter = Inter({ variable: '--font-inter', subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: { default: 'Slotwise — online booking for small businesses', template: '%s · Slotwise' },
+  title: { default: 'Slotwise - online booking for small businesses', template: '%s · Slotwise' },
   description:
     'Slotwise gives salons, clinics, tutors and studios a public booking page with real-time availability, no double bookings and a simple dashboard.',
 }

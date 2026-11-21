@@ -16,7 +16,7 @@ export async function createBusiness(_prev: FormState, formData: FormData): Prom
   const data = parsed.data
 
   if (await db.business.findUnique({ where: { slug: data.slug }, select: { id: true } })) {
-    return { fields: { slug: 'That link is taken — try another.' } }
+    return { fields: { slug: 'That link is taken - try another.' } }
   }
 
   await db.business.create({

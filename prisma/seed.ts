@@ -26,7 +26,7 @@ const hours = [
   { weekday: 6, openMin: 9 * 60, closeMin: 21 * 60 },
 ]
 
-const customers = ['Aditi Kulkarni', 'Rahul Verma', 'Sneha Pillai', 'Imran Shaikh', 'Meera Iyer', 'Karan Malhotra', 'Pooja Nair', 'Vikram Rao']
+const customers = ['Aditi Kulkarni', 'Rahul Jadhav', 'Sneha Pawar', 'Imran Shaikh', 'Meera Deshpande', 'Karan More', 'Pooja Gaikwad', 'Vikram Bhosale']
 
 async function main() {
   await db.user.deleteMany({ where: { email: DEMO_EMAIL } }) // cascades to the demo business and its bookings
@@ -40,9 +40,9 @@ async function main() {
       ownerId: user.id,
       name: 'Velvet & Vine Salon',
       slug: 'velvet-vine',
-      description: 'Hair, skin and nails in a calm Koramangala studio. (Demo business — bookings here are not real.)',
-      phone: '+91 80 0000 0001',
-      address: '80 Feet Road, Koramangala, Bengaluru',
+      description: 'Hair, skin and nails in a calm studio on Baner Road, Pune. (Demo business - bookings here are not real.)',
+      phone: '+91 20 0000 0001',
+      address: 'Shop 4, Baner Road, Baner, Pune 411045',
       timezone: TZ,
       slotStepMin: 15,
       minNoticeMin: 60,
@@ -57,7 +57,7 @@ async function main() {
           { name: 'Classic manicure', description: 'Shape, cuticle care and polish', durationMin: 45, price: 600 },
         ],
       },
-      staff: { create: [{ name: 'Nisha Fernandes' }, { name: 'Arjun Menon' }, { name: 'Kavya Reddy' }] },
+      staff: { create: [{ name: 'Neha Joshi' }, { name: 'Arjun Patil' }, { name: 'Kavya Shinde' }] },
     },
     include: { services: true, staff: true },
   })

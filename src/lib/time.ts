@@ -13,7 +13,7 @@ export function isDateString(value: unknown): value is DateString {
   return dt.getUTCFullYear() === y && dt.getUTCMonth() === m - 1 && dt.getUTCDate() === d
 }
 
-/** Day of week (0 = Sunday) of a calendar date — the same in every time zone. */
+/** Day of week (0 = Sunday) of a calendar date - the same in every time zone. */
 export function weekdayOf(date: DateString): number {
   const [y, m, d] = date.split('-').map(Number)
   return new Date(Date.UTC(y, m - 1, d)).getUTCDay()

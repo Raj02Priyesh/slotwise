@@ -74,7 +74,7 @@ export async function saveHours(_prev: FormState, formData: FormData): Promise<F
     db.workingHours.createMany({ data: rows.map((r) => ({ ...r, businessId: business.id })) }),
   ])
   revalidatePath('/dashboard', 'layout')
-  return { success: rows.length ? 'Opening hours saved.' : 'Saved — you’re now closed every day, so customers can’t book.' }
+  return { success: rows.length ? 'Opening hours saved.' : 'Saved - you’re now closed every day, so customers can’t book.' }
 }
 
 export async function saveSettings(_prev: FormState, formData: FormData): Promise<FormState> {
@@ -87,7 +87,7 @@ export async function saveSettings(_prev: FormState, formData: FormData): Promis
   }
   if (profile.data.slug !== business.slug) {
     const taken = await db.business.findUnique({ where: { slug: profile.data.slug }, select: { id: true } })
-    if (taken) return { fields: { slug: 'That link is taken — try another.' } }
+    if (taken) return { fields: { slug: 'That link is taken - try another.' } }
   }
   await db.business.update({ where: { id: business.id }, data: { ...profile.data, ...rules.data } })
   revalidatePath('/dashboard', 'layout')

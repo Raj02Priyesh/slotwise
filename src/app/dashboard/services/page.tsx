@@ -17,7 +17,7 @@ export default async function ServicesPage({ searchParams }: PageProps<'/dashboa
       {welcome && (
         <div className="rounded-xl border border-brand-200 bg-brand-50 p-5 text-brand-900">
           <p className="font-semibold">🎉 Your booking page is ready.</p>
-          <p className="mt-1 text-sm">Step 2 of 2: add the services customers can book. We’ve set you up as the first team member and opened Monday–Saturday, 10 AM–7 PM — change these any time.</p>
+          <p className="mt-1 text-sm">Step 2 of 2: add the services customers can book. We’ve set you up as the first team member and opened Monday–Saturday, 10 AM–7 PM - change these any time.</p>
         </div>
       )}
       <div>
@@ -33,7 +33,7 @@ export default async function ServicesPage({ searchParams }: PageProps<'/dashboa
       <section>
         <h2 className="sr-only">Your services</h2>
         {services.length === 0 ? (
-          <p className="card p-8 text-center text-slate-500">No services yet — add your first one above.</p>
+          <p className="card p-8 text-center text-slate-500">No services yet - add your first one above.</p>
         ) : (
           <ul className="card divide-y divide-slate-100">
             {services.map((s) => (

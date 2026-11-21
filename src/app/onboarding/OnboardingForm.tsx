@@ -49,7 +49,7 @@ export function OnboardingForm() {
       </div>
       <div>
         <label htmlFor="description" className="label">Short description <span className="font-normal text-slate-400">(optional)</span></label>
-        <textarea id="description" name="description" rows={2} className="input" placeholder="Hair, skin and nails in Koramangala" />
+        <textarea id="description" name="description" rows={2} className="input" placeholder="Hair, skin and nails in Baner, Pune" />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
