@@ -44,9 +44,13 @@ export default async function BookingsPage({ searchParams }: PageProps<'/dashboa
     }),
   ])
 
-  const host = (await headers()).get('host') ?? 'localhost:3000'
-  const proto = host.startsWith('localhost') || host.startsWith('127.') ? 'http' : 'https'
-  const bookingUrl = `${proto}://${host}/book/${business.slug}`
+  // Behind a proxy (Render, etc.) the public host arrives in x-forwarded-host, not host.
+  const h = await headers()
+  const host = (h.get('x-forwarded-host') ?? h.get('host') ?? 'localhost:3000').split(',')[0].trim()
+  const forwardedProto = h.get('x-forwarded-proto')?.split(',')[0].trim()
+  const proto = forwardedProto ?? (host.startsWith('localhost') || host.startsWith('127.') ? 'http' : 'https')
+  const publicUrl = (process.env.APP_URL ?? process.env.RENDER_EXTERNAL_URL ?? `${proto}://${host}`).replace(/\/$/, '')
+  const bookingUrl = `${publicUrl}/book/${business.slug}`
   const setupDone = services > 0 && staffCount > 0 && hoursCount > 0
 
   // Group by local calendar day.
